@@ -14,7 +14,8 @@ void main()
 	cout << q.pop() << endl;
 	cout << q.pop() << endl;
 
-
+	if( true && false || true )
+		cout << "f";
 
 	if(a.isfull()) cout << "oh" << endl ;
 	if(a.isempty()) cout << "hello" << endl;

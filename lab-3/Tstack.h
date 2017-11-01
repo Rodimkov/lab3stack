@@ -1,21 +1,24 @@
+#pragma once
+
 template <class T>
 
 class Tstack
 {
 private:
 	T *array;
-	int size;
-	int Max;
+	int size;								// текущий размер
+	int Max;								// максимальный размер 
 public:
 	Tstack(int _size = 100);
 	~Tstack();
 	Tstack(const Tstack& ts);
 	Tstack& operator=(const Tstack& ts);
-	int isfull(); // проверка пустоты
-	int isempty();//проверка полноты
-	T top();   // получение верхнего элемента
-	T pop();   // получение и удаление верхнего элемента
-	void push(T el); // устновка элемента
+	int isfull();							// проверка пустоты
+	int isempty();							// проверка полноты
+	T top();								// получение верхнего элемента
+	T pop();								// получение и удаление верхнего элемента
+	void push(T el);						// устновка элемента
+	void clear();							// очистка стека
 };
 
 template <class T>
@@ -101,4 +104,10 @@ void Tstack<T>::push(T el)
 	if(isfull()) throw -1;
 	array[size] = el;
 	size++;
+}
+
+template <class T>
+void Tstack<T>::clear()
+{
+	size = 0;
 }
