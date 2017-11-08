@@ -1,6 +1,5 @@
 #include "TCalculator.h"
 
-
 TCalculator::TCalculator(void)
 {
 }
@@ -16,6 +15,7 @@ int TCalculator::priority(char c)
 	if ( c == '+' || c == '-' ) return 1;
 	if ( c == '*' || c == '/' ) return 2;
 	if ( c == '^' ) return 3;
+	if ( c == ')' ) return 4;
 }
 
 bool TCalculator::check()
@@ -36,6 +36,7 @@ bool TCalculator::check()
 void TCalculator::topostfix()
 {
 	stc.clear();
+	postfix = "";
 	string buf = '(' + infix + ')';
 	for( int i = 0 ; i < buf.size() ; i++)
 	{
@@ -52,13 +53,58 @@ void TCalculator::topostfix()
 				el = stc.pop();
 			}
 		}
-		if( ( buf[i] == '+') || (buf[i] == '-') || (buf[i] == '*') || (buf[i] == '/') || (buf[i] == '^') )
+		if(  buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/' || buf[i] == '^' )
 		{
-			while ( (priority(stc.top()) >= priority(buf[i])) && buf[i] != '(' ) // чуть чуть не то //еще если скобка ее не выкидываем 
+			postfix += ' ';
+			while ( (priority(stc.top()) >= priority(buf[i])) ) 
 				postfix += stc.pop();
 			stc.push(buf[i]);
 		}
 	}
+}
+
+
+double TCalculator::calk()
+{
+	double res;
+	std.clear();
+	topostfix();
+	for(int i = 0 ; i < postfix.size() ; i++)
+	{
+		if( postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
+		{
+			double op1,op2 = std.pop();
+			op1 = std.pop();
+			switch(postfix[i]) 
+			{
+			case '+':
+				std.push(op1+op2);
+				break;
+			case '-':
+				std.push(op1-op2);
+				break;
+			case '*':
+				std.push(op1*op2);
+				break;
+			case '/':
+				std.push(op1/op2);
+				break;
+			case '^':
+				std.push(pow(op1,op2));
+				break;
+			}
+		}
+		if(postfix[i] >= '0' && postfix[i] <= '9' || postfix[i] == '.')
+		{
+			char *tmp;
+			std.push(strtod(&postfix[i], &tmp));
+			i +=  tmp - &postfix[i] -1;
+		}
+	}
+	if( std.isempty() ) throw -1;
+	res = std.pop();
+	if( !std.isempty() ) throw -1;
+	return res;
 }
 
 

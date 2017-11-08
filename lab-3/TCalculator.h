@@ -10,6 +10,7 @@ private:
 	string infix;
 	string postfix;
 	Tstack<char> stc;
+	Tstack<double> std;
 public:
 	TCalculator(void);
 	~TCalculator(void);
@@ -18,6 +19,7 @@ public:
 	string getpostfix();			// получение строки из postfix
 	int priority(char);				// определение приоритета операции
 	bool check();					// проверка корректности введенной строки 
-	void topostfix();				// перевод из инфиксной записи в постфиксную 
+	void topostfix();				// перевод из инфиксной записи в постфиксную
+	double calk();					// вычисление выражения
 };
 
