@@ -110,6 +110,20 @@ double TCalculator::calk()
 
 void TCalculator::setinfix(string s)
 {
+	if( !(s[0] >= '0' && s[0] <= '9' || s[0] == '.'))
+		throw -1;
+	if( !(s[s.size()-1] >= '0' && s[s.size()-1] <= '9' || s[s.size()-1] == '.'))
+		throw -1;
+	for(int i = 0 ; i < s.size() ; i++)
+		if(s[i] == ' ')
+		{
+			s.erase(i,i+1);
+			i--;
+		}
+	if( s == "")
+		throw -1;
+	for(int i = 0 ; i < s.size() ; i++)
+		if( !(s[i] >= '0' && s[i] <= '9' || s[i] == '.') && !(s[i+1] >= '0' && s[i+1] <= '9' || s[i+1] == '.'))
 	infix = s;
 }
 
@@ -121,4 +135,13 @@ string TCalculator::getinfix()
 string TCalculator::getpostfix()
 {
 	return postfix;
+}
+
+Tcalculator::Tcalculator(void)
+{
+}
+
+
+Tcalculator::~Tcalculator(void)
+{
 }
