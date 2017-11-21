@@ -23,10 +23,4 @@ public:
 	double calk();					// вычисление выражения
 };
 
-class Tcalculator
-{
-public:
-	Tcalculator(void);
-	~Tcalculator(void);
-};
 

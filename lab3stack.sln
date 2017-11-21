@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab3stack", "lab3stack\lab3stack.vcxproj", "{61C292F3-580F-4B79-938E-D8563F01D10F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{6A5347B8-CD96-4942-B551-C30BCAA6524D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "calculator", "calculator\calculator.vcxproj", "{292F8D3C-A2A4-4E79-8319-F14AE1D6F7FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61C292F3-580F-4B79-938E-D8563F01D10F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{61C292F3-580F-4B79-938E-D8563F01D10F}.Debug|Win32.Build.0 = Debug|Win32
+		{61C292F3-580F-4B79-938E-D8563F01D10F}.Release|Win32.ActiveCfg = Release|Win32
+		{61C292F3-580F-4B79-938E-D8563F01D10F}.Release|Win32.Build.0 = Release|Win32
+		{6A5347B8-CD96-4942-B551-C30BCAA6524D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6A5347B8-CD96-4942-B551-C30BCAA6524D}.Debug|Win32.Build.0 = Debug|Win32
+		{6A5347B8-CD96-4942-B551-C30BCAA6524D}.Release|Win32.ActiveCfg = Release|Win32
+		{6A5347B8-CD96-4942-B551-C30BCAA6524D}.Release|Win32.Build.0 = Release|Win32
+		{292F8D3C-A2A4-4E79-8319-F14AE1D6F7FB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{292F8D3C-A2A4-4E79-8319-F14AE1D6F7FB}.Debug|Win32.Build.0 = Debug|Win32
+		{292F8D3C-A2A4-4E79-8319-F14AE1D6F7FB}.Release|Win32.ActiveCfg = Release|Win32
+		{292F8D3C-A2A4-4E79-8319-F14AE1D6F7FB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

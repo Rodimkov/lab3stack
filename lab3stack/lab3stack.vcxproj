@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6A5347B8-CD96-4942-B551-C30BCAA6524D}</ProjectGuid>
+    <ProjectGuid>{61C292F3-580F-4B79-938E-D8563F01D10F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>test</RootNamespace>
+    <RootNamespace>lab3stack</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -74,14 +74,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="gtest.h" />
+    <ClCompile Include="lab.cpp" />
+    <ClCompile Include="TCalculator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab3stack\TCalculator.cpp" />
-    <ClCompile Include="gtest-all.cc" />
-    <ClCompile Include="test_calculator.cpp" />
-    <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="test_stack.cpp" />
+    <ClInclude Include="TCalculator.h" />
+    <ClInclude Include="Tstack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

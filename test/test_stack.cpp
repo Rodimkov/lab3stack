@@ -1,4 +1,4 @@
-#include "..\lab-3\Tstack.h"
+#include "..\lab3stack\Tstack.h"
 
 #include "gtest.h"
 
