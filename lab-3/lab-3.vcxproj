@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9360ACB1-A2B0-401E-A950-13D9D4BD00E4}</ProjectGuid>
+    <ProjectGuid>{063545DB-BD8D-4B72-B7EE-8B15E02D67DD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>test</RootNamespace>
+    <RootNamespace>lab3</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,12 +74,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gtest-all.cc" />
-    <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="test_stack.cpp" />
+    <ClCompile Include="lab.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gtest.h" />
+    <ClInclude Include="Tstack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
