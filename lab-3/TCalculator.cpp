@@ -21,6 +21,22 @@ int TCalculator::priority(char c)
 bool TCalculator::check()
 {
 	stc.clear();
+
+	if( infix == "")
+		return false;
+
+	for(int i = 0 ; i < infix.size() ; i++)
+		{
+			if(infix[i] == ' ')
+			{
+				infix.erase(i,i+1);
+				i--;
+			}
+			if( ( infix[i] >= '?' && infix[i] <= 'Z' )  || ( infix[i] >= 'a' && infix[i] <= 'z' ) )
+				return false;
+		}
+
+	// корректность введеных скобок
 	for ( int i = 0 ; i < infix.size() ; i++ )
 	{
 		if ( infix[i] == '(' ) 
@@ -30,37 +46,56 @@ bool TCalculator::check()
 			else stc.pop();
 	}
 	if ( !stc.isempty() ) return false;
-	else return true;
+	// корректность введного конца
+	if( !(infix[0] >= '0' && infix[0] <= '9' || infix[0] == '.'))
+		return false;
+	if( !(infix[infix.size()-1] >= '0' && infix[infix.size()-1] <= '9' || infix[infix.size()-1] == '.'))
+		return false;
+
+	for(int i = 0 ; i < infix.size() ; i++)
+		if( infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^' )
+			if( !(infix[i-1] >= '0' && infix[i-1] <= '9' || infix[i-1] == '.' ||  infix[i-1] == ')' ) || !(infix[i+1] >= '0' && infix[i+1] <= '9' || infix[i+1] == '.' || infix[i+1] == '('))
+				return false;
+	//пустота строки
+	if( infix == "")
+		return false;
+
+
+	return true;
 }
 
 void TCalculator::topostfix()
 {
-	stc.clear();
-	postfix = "";
-	string buf = '(' + infix + ')';
-	for( int i = 0 ; i < buf.size() ; i++)
+	if(check()) 
 	{
-		if( buf[i] == '(') 
-			stc.push(buf[i]);
-		if( buf[i] >= '0'  && buf[i] <= '9' || buf[i] == '.')
-			postfix += buf[i];
-		if( buf[i] == ')' )
+		stc.clear();
+		postfix = "";
+		string buf = '(' + infix + ')';
+		for( int i = 0 ; i < buf.size() ; i++)
 		{
-			char el = stc.pop();
-			while( el != '(' )
+			if( buf[i] == '(') 
+				stc.push(buf[i]);
+			if( buf[i] >= '0'  && buf[i] <= '9' || buf[i] == '.')
+				postfix += buf[i];
+			if( buf[i] == ')' )
 			{
-				postfix += el;
-				el = stc.pop();
+				char el = stc.pop();
+				while( el != '(' )
+				{
+					postfix += el;
+					el = stc.pop();
+				}
+			}
+			if(  buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/' || buf[i] == '^' )
+			{
+				postfix += ' ';
+				while ( (priority(stc.top()) >= priority(buf[i])) ) 
+					postfix += stc.pop();
+				stc.push(buf[i]);
 			}
 		}
-		if(  buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/' || buf[i] == '^' )
-		{
-			postfix += ' ';
-			while ( (priority(stc.top()) >= priority(buf[i])) ) 
-				postfix += stc.pop();
-			stc.push(buf[i]);
-		}
 	}
+	else throw -1;
 }
 
 
@@ -110,38 +145,16 @@ double TCalculator::calk()
 
 void TCalculator::setinfix(string s)
 {
-	if( !(s[0] >= '0' && s[0] <= '9' || s[0] == '.'))
-		throw -1;
-	if( !(s[s.size()-1] >= '0' && s[s.size()-1] <= '9' || s[s.size()-1] == '.'))
-		throw -1;
-	for(int i = 0 ; i < s.size() ; i++)
-		if(s[i] == ' ')
-		{
-			s.erase(i,i+1);
-			i--;
-		}
-	if( s == "")
-		throw -1;
-	for(int i = 0 ; i < s.size() ; i++)
-		if( !(s[i] >= '0' && s[i] <= '9' || s[i] == '.') && !(s[i+1] >= '0' && s[i+1] <= '9' || s[i+1] == '.'))
 	infix = s;
 }
 
 string TCalculator::getinfix()
 {
+	topostfix();
 	return infix;
 }
 
 string TCalculator::getpostfix()
 {
 	return postfix;
-}
-
-Tcalculator::Tcalculator(void)
-{
-}
-
-
-Tcalculator::~Tcalculator(void)
-{
 }

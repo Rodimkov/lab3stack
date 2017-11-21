@@ -8,13 +8,8 @@ using namespace std;
 
 void main() 
 {
-	string infix = "";
-	for(int i = 0 ; i < infix.size() ; i++)
-		
-		if(infix[i] == ' ')
-		{
-			infix.erase(i,i+1);
-			i--;
-		}
+	TCalculator a;
+	a.setinfix("2+2");
+	cout << a.getpostfix();
 	system("pause");
 }
