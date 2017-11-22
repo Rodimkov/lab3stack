@@ -22,7 +22,7 @@ bool TCalculator::check()
 {
 	stc.clear();
 
-	for(int i = 0 ; i < infix.size() ; i++)
+	for(unsigned int i = 0 ; i < infix.size() ; i++)
 		{
 			if(infix[i] == ' ')
 			{
@@ -36,7 +36,7 @@ bool TCalculator::check()
 	if( infix == "")
 		return false;
 	// корректность введеных скобок
-	for ( int i = 0 ; i < infix.size() ; i++ )
+	for ( unsigned int i = 0 ; i < infix.size() ; i++ )
 	{
 		if ( infix[i] == '(' ) 
 			stc.push('(');
@@ -51,10 +51,10 @@ bool TCalculator::check()
 	if( !(infix[infix.size()-1] >= '0' && infix[infix.size()-1] <= '9' || infix[infix.size()-1] == '.'))
 		return false;
 
-	for(int i = 0 ; i < infix.size() ; i++)
+	for(unsigned int i = 0 ; i < infix.size() ; i++)
 		if( infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^' )
 			if( !(infix[i-1] >= '0' && infix[i-1] <= '9' || infix[i-1] == '.' || infix[i-1] == ')') ||
-				!(infix[i+1] >= '0' && infix[i+1] <= '9' || infix[i+1] == '.' || infix[i+1] == '(') )
+																		!(infix[i+1] >= '0' && infix[i+1] <= '9' || infix[i+1] == '.' || infix[i+1] == '(') )
 				return false;
 
 	return true;
@@ -62,12 +62,23 @@ bool TCalculator::check()
 
 void TCalculator::topostfix()
 {
-	if(check()) 
+	//исключение 
+	try
+	{
+		if( !check() )
+			throw -1;
+	}
+	catch (int i )
+	{
+		cout << "error " << i << endl;
+	}
+
+
 	{
 		stc.clear();
 		postfix = "";
 		string buf = '(' + infix + ')';
-		for( int i = 0 ; i < buf.size() ; i++)
+		for( unsigned int i = 0 ; i < buf.size() ; i++)
 		{
 			if( buf[i] == '(') 
 				stc.push(buf[i]);
@@ -91,7 +102,6 @@ void TCalculator::topostfix()
 			}
 		}
 	}
-	else throw -1;
 }
 
 
@@ -100,7 +110,7 @@ double TCalculator::calk()
 	double res;
 	std.clear();
 	topostfix();
-	for(int i = 0 ; i < postfix.size() ; i++)
+	for(unsigned int i = 0 ; i < postfix.size() ; i++)
 	{
 		if( postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
 		{
@@ -154,4 +164,3 @@ string TCalculator::getpostfix()
 	topostfix();
 	return postfix;
 }
-// не хорошо что постфиксную образовываем вот так

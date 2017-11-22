@@ -22,6 +22,7 @@ TEST(TCalculator, can_get_postfix)
 	EXPECT_EQ("2 2+",tc.getpostfix());
 }
 
+
 TEST(TCalculator, can_calculate_simple)
 {
 	TCalculator tc;

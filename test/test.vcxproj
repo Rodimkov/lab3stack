@@ -74,7 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab-3\TCalculator.cpp" />
+    <ClCompile Include="..\lab3stack\TCalculator.cpp" />
     <ClCompile Include="gtest-all.cc" />
     <ClCompile Include="test_calculator.cpp" />
     <ClCompile Include="test_main.cpp" />

@@ -81,6 +81,7 @@ namespace calculator {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(212, 38);
 			this->textBox1->TabIndex = 1;
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Form1::textBox1_KeyPress);
 			// 
 			// textBox2
 			// 
@@ -90,12 +91,13 @@ namespace calculator {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(100, 38);
 			this->textBox2->TabIndex = 2;
+
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(621, 292);
+			this->ClientSize = System::Drawing::Size(549, 174);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
@@ -106,20 +108,24 @@ namespace calculator {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ e)
+	private: void button1_Click(System::Object^  sender, System::EventArgs^ e)
 			 {
+				TCalculator tc;
+				string infix;
+				
+				infix = msclr::interop::marshal_as<string>(textBox1->Text);
 
-				 TCalculator tc;
-				 string infix;
+				tc.setinfix(infix);
 
-				 infix = msclr::interop::marshal_as<string>(textBox1->Text);
-
-				 tc.setinfix(infix);
-
-
-				 textBox2->Text = System::Convert::ToString(tc.calk());
+				textBox2->Text = System::Convert::ToString(tc.calk());
+				 
 				 
 			 }
+
+private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+			  if( e->KeyChar == 13 ) // чтобы keycode надо создававать keydown;
+				  button1_Click(sender,e);
+		 }
 };
 }
 
