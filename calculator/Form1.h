@@ -123,7 +123,7 @@ namespace calculator {
 			 }
 
 private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
-			  if( e->KeyChar == 13 ) // чтобы keycode надо создававать keydown;
+			  if( e->KeyChar == 13 ) 
 				  button1_Click(sender,e);
 		 }
 };

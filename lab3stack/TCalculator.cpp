@@ -22,6 +22,7 @@ bool TCalculator::check()
 {
 	stc.clear();
 
+	// корректность строки
 	for(unsigned int i = 0 ; i < infix.size() ; i++)
 		{
 			if(infix[i] == ' ')
@@ -44,17 +45,19 @@ bool TCalculator::check()
 			if ( stc.isempty() )  return false;
 			else stc.pop();
 	}
-	if ( !stc.isempty() ) return false;
+	if ( !stc.isempty() ) 
+		return false;
+	// корректность введного начала
+	if( !(infix[0] >= '0' && infix[0] <= '9' || infix[0] == '.' || infix[0] == '(' ))
+		return false;
 	// корректность введного конца
-	if( !(infix[0] >= '0' && infix[0] <= '9' || infix[0] == '.'))
+	if( !(infix[infix.size()-1] >= '0' && infix[infix.size()-1] <= '9' || infix[infix.size()-1] == ')') )
 		return false;
-	if( !(infix[infix.size()-1] >= '0' && infix[infix.size()-1] <= '9' || infix[infix.size()-1] == '.'))
-		return false;
-
+	//  корректность введной "серeдины"
 	for(unsigned int i = 0 ; i < infix.size() ; i++)
 		if( infix[i] == '+' || infix[i] == '-' || infix[i] == '*' || infix[i] == '/' || infix[i] == '^' )
-			if( !(infix[i-1] >= '0' && infix[i-1] <= '9' || infix[i-1] == '.' || infix[i-1] == ')') ||
-																		!(infix[i+1] >= '0' && infix[i+1] <= '9' || infix[i+1] == '.' || infix[i+1] == '(') )
+			if( !(infix[i-1] >= '0' && infix[i-1] <= '9' || infix[i-1] == '.' || infix[i-1] == ')' || infix[i-1] == '(') ||
+																		!(infix[i+1] >= '0' && infix[i+1] <= '9' || infix[i+1] == '.' || infix[i+1] == '(' || infix[i+1] == ')') )
 				return false;
 
 	return true;
@@ -62,26 +65,22 @@ bool TCalculator::check()
 
 void TCalculator::topostfix()
 {
-	//исключение 
-	try
-	{
-		if( !check() )
-			throw -1;
-	}
-	catch (int i )
-	{
-		cout << "error " << i << endl;
-	}
-
-
+	if( check() )
 	{
 		stc.clear();
 		postfix = "";
 		string buf = '(' + infix + ')';
 		for( unsigned int i = 0 ; i < buf.size() ; i++)
 		{
-			if( buf[i] == '(') 
+			if( buf[i] == '(') 	
+			{
 				stc.push(buf[i]);
+				if( buf[i+1] == '-')
+				{	
+					postfix += "(";
+					i+=2;
+				}
+			}
 			if( buf[i] >= '0'  && buf[i] <= '9' || buf[i] == '.')
 				postfix += buf[i];
 			if( buf[i] == ')' )
@@ -93,8 +92,10 @@ void TCalculator::topostfix()
 					el = stc.pop();
 				}
 			}
+
 			if(  buf[i] == '+' || buf[i] == '-' || buf[i] == '*' || buf[i] == '/' || buf[i] == '^' )
 			{
+				
 				postfix += ' ';
 				while ( (priority(stc.top()) >= priority(buf[i])) ) 
 					postfix += stc.pop();
@@ -102,6 +103,7 @@ void TCalculator::topostfix()
 			}
 		}
 	}
+	else throw -1;
 }
 
 
@@ -139,6 +141,12 @@ double TCalculator::calk()
 		{
 			char *tmp;
 			std.push(strtod(&postfix[i], &tmp));
+			i +=  tmp - &postfix[i] -1;
+		}
+		if ( postfix[i] == '(' )
+		{
+			char *tmp;
+			std.push(-strtod(&postfix[++i], &tmp));
 			i +=  tmp - &postfix[i] -1;
 		}
 	}

@@ -30,6 +30,13 @@ TEST(TCalculator, can_calculate_simple)
 	EXPECT_EQ(4,tc.calk());
 }
 
+TEST(TCalculator, can_calculate_operation_with_negative_number)
+{
+	TCalculator tc;
+	tc.setinfix("3*(-4)");
+	EXPECT_EQ(-12,tc.calk());
+}
+
 TEST(TCalculator, can_calculate_complicated)
 {
 	TCalculator tc;

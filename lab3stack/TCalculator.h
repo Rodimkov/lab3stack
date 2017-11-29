@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tstack.h"
+#include "Math.h"
 #include <string>
 using namespace std;
 
