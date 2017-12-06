@@ -81,6 +81,7 @@ namespace calculator {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(212, 38);
 			this->textBox1->TabIndex = 1;
+			this->textBox1->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Form1::textBox1_KeyDown);
 			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Form1::textBox1_KeyPress);
 			// 
 			// textBox2
@@ -91,7 +92,6 @@ namespace calculator {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(100, 38);
 			this->textBox2->TabIndex = 2;
-
 			// 
 			// Form1
 			// 
@@ -110,21 +110,27 @@ namespace calculator {
 #pragma endregion
 	private: void button1_Click(System::Object^  sender, System::EventArgs^ e)
 			 {
-				TCalculator tc;
-				string infix;
-				
-				infix = msclr::interop::marshal_as<string>(textBox1->Text);
-
-				tc.setinfix(infix);
-
-				textBox2->Text = System::Convert::ToString(tc.calk());
-				 
-				 
+				try
+				{
+					TCalculator tc;
+					string infix;
+					infix = msclr::interop::marshal_as<string>(textBox1->Text);
+					tc.setinfix(infix);
+					textBox2->Text = System::Convert::ToString(tc.calk());
+				}
+				catch(...)	
+				{
+					textBox2->Text = "Error" ; 
+				}
 			 }
 
 private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
-			  if( e->KeyChar == 13 ) 
-				  button1_Click(sender,e);
+			  //if( e->KeyChar == 13 ) 
+				 //button1_Click(sender,e);
+		 }
+private: System::Void textBox1_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
+			 if( e->KeyCode == Keys::Enter )
+				 button1_Click(sender,e);
 		 }
 };
 }

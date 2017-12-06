@@ -40,7 +40,7 @@ TEST(TCalculator, can_calculate_operation_with_negative_number)
 TEST(TCalculator, can_calculate_complicated)
 {
 	TCalculator tc;
-	tc.setinfix("2+2*2^(3+3)*8");
+	tc.setinfix("2+2*2^(10-4)*8");
 	EXPECT_EQ(1026,tc.calk());
 }
 
@@ -54,7 +54,7 @@ TEST(TCalculator, throws_when_can_calculate_empty_string)
 TEST(TCalculator, throws_when_can_calculate_incorrect_operations_string)
 {
 	TCalculator tc;
-	tc.setinfix("+");
+	tc.setinfix("*");
 	ASSERT_ANY_THROW(tc.calk());
 }
 

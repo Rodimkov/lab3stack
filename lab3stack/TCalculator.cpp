@@ -33,9 +33,11 @@ bool TCalculator::check()
 			if( ( infix[i] >= 'A' && infix[i] <= 'Z' )  || ( infix[i] >= 'a' && infix[i] <= 'z' ) )
 				return false;
 		}
+
 	//пустота строки
 	if( infix == "")
 		return false;
+
 	// корректность введеных скобок
 	for ( unsigned int i = 0 ; i < infix.size() ; i++ )
 	{
@@ -47,6 +49,7 @@ bool TCalculator::check()
 	}
 	if ( !stc.isempty() ) 
 		return false;
+
 	// корректность введного начала
 	if( !(infix[0] >= '0' && infix[0] <= '9' || infix[0] == '.' || infix[0] == '(' ))
 		return false;
